@@ -5,31 +5,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Ceci Rodriguez | Web Developer</title>
-
     <meta
         name="description"
-        content="Portfolio de Ceci Rodríguez, desarrolladora web en formación."
+        content="Portfolio de Ceci Rodriguez, Web Developer en formación."
     >
+
+    <title>Ceci Rodríguez | Web Developer</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- NAVEGACIÓN -->
+    <!-- =========================
+         NAVBAR
+    ========================== -->
 
     <header class="header">
 
         <nav class="nav">
 
-            <a href="#" class="logo">
+            <a href="#inicio" class="logo">
                 Ceci Rodriguez
             </a>
 
-            <ul class="nav-links">
+            <button
+                class="menu-button"
+                id="menu-button"
+                aria-label="Abrir menú"
+            >
+                ☰
+            </button>
+
+            <ul class="nav-links" id="nav-links">
+
                 <li>
                     <a href="#sobre-mi">Sobre mí</a>
+                </li>
+
+                <li>
+                    <a href="#tecnologias">Tecnologías</a>
                 </li>
 
                 <li>
@@ -39,6 +54,7 @@
                 <li>
                     <a href="#contacto">Contacto</a>
                 </li>
+
             </ul>
 
         </nav>
@@ -46,27 +62,30 @@
     </header>
 
 
-    <!-- CONTENIDO PRINCIPAL -->
+    <!-- =========================
+         CONTENIDO
+    ========================== -->
 
     <main>
 
         <!-- HERO -->
 
-        <section class="hero">
+        <section class="hero" id="inicio">
 
             <div class="hero-content">
 
-                <p class="hero-subtitle">
+                <p class="hero-tag">
                     WEB DEVELOPER EN FORMACIÓN
                 </p>
 
                 <h1>
-                    Hola, soy Ceci.
+                    Hola, soy <span>Ceci.</span>
                 </h1>
 
                 <p class="hero-description">
-                    Estoy aprendiendo desarrollo web y construyendo
-                    proyectos mientras avanzo en mi formación.
+                    Estoy formándome en desarrollo web y creando
+                    proyectos para convertir mis conocimientos en
+                    experiencias digitales funcionales y atractivas.
                 </p>
 
                 <div class="hero-buttons">
@@ -79,6 +98,7 @@
                         href="https://github.com/chechu-1984"
                         class="btn btn-secondary"
                         target="_blank"
+                        rel="noopener noreferrer"
                     >
                         GitHub
                     </a>
@@ -92,16 +112,16 @@
 
         <!-- SOBRE MÍ -->
 
-        <section id="sobre-mi" class="about">
+        <section class="section about" id="sobre-mi">
 
             <div class="section-heading">
 
-                <p class="section-subtitle">
+                <p class="section-label">
                     SOBRE MÍ
                 </p>
 
                 <h2>
-                    Conociéndome un poco
+                    Construyendo mi camino en desarrollo web
                 </h2>
 
             </div>
@@ -109,16 +129,100 @@
             <div class="about-content">
 
                 <p>
-                    Soy Ceci Rodriguez y estoy formándome en desarrollo web.
-                    Me interesa crear sitios web funcionales, modernos y
-                    adaptables a distintos dispositivos.
+                    Soy Ceci Rodriguez y actualmente estoy estudiando
+                    desarrollo web. Me interesa crear sitios modernos,
+                    funcionales y adaptables a diferentes dispositivos.
                 </p>
 
                 <p>
-                    Actualmente estoy trabajando en mis conocimientos de
-                    HTML, CSS y JavaScript, mientras desarrollo proyectos
-                    para seguir aprendiendo y construir mi portfolio.
+                    Estoy desarrollando mis conocimientos en HTML, CSS
+                    y JavaScript, mientras practico creando proyectos
+                    reales que me permitan seguir creciendo como
+                    desarrolladora.
                 </p>
+
+                <p>
+                    Mi objetivo es continuar ampliando mis conocimientos
+                    y formar parte de proyectos donde pueda seguir
+                    aprendiendo y aportando mis habilidades.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- TECNOLOGÍAS -->
+
+        <section class="section technologies" id="tecnologias">
+
+            <div class="section-heading">
+
+                <p class="section-label">
+                    TECNOLOGÍAS
+                </p>
+
+                <h2>
+                    Herramientas que estoy aprendiendo
+                </h2>
+
+            </div>
+
+            <div class="technologies-grid">
+
+                <div class="technology-card">
+                    <span class="technology-number">01</span>
+                    <h3>HTML</h3>
+                    <p>Estructura y semántica web.</p>
+                </div>
+
+                <div class="technology-card">
+                    <span class="technology-number">02</span>
+                    <h3>CSS</h3>
+                    <p>Diseño, estilos y layouts.</p>
+                </div>
+
+                <div class="technology-card">
+                    <span class="technology-number">03</span>
+                    <h3>JavaScript</h3>
+                    <p>Interactividad y lógica.</p>
+                </div>
+
+                <div class="technology-card">
+                    <span class="technology-number">04</span>
+                    <h3>Git</h3>
+                    <p>Control de versiones.</p>
+                </div>
+
+                <div class="technology-card">
+                    <span class="technology-number">05</span>
+                    <h3>GitHub</h3>
+                    <p>Repositorios y proyectos.</p>
+                </div>
+
+                <div class="technology-card">
+                    <span class="technology-number">06</span>
+                    <h3>Responsive Design</h3>
+                    <p>Interfaces adaptables.</p>
+                </div>
+
+            </div>
+
+            <div class="language-card">
+
+                <div>
+                    <span class="technology-number">
+                        IDIOMA
+                    </span>
+
+                    <h3>
+                        Inglés avanzado
+                    </h3>
+                </div>
+
+                <span class="language-level">
+                    Advanced English
+                </span>
 
             </div>
 
@@ -127,47 +231,69 @@
 
         <!-- PROYECTOS -->
 
-        <section id="proyectos" class="projects">
+        <section class="section projects" id="proyectos">
 
             <div class="section-heading">
 
-                <p class="section-subtitle">
+                <p class="section-label">
                     PROYECTOS
                 </p>
 
                 <h2>
-                    Lo que estoy construyendo
+                    Proyectos que estoy construyendo
                 </h2>
 
             </div>
 
             <div class="projects-grid">
 
+                <!-- PROYECTO 1 -->
+
                 <article class="project-card">
 
                     <div class="project-image">
-                        Proyecto 1
+                        <span>01</span>
                     </div>
 
-                    <div class="project-content">
+                    <div class="project-info">
+
+                        <p class="project-type">
+                            WEB DEVELOPMENT
+                        </p>
 
                         <h3>
-                            Próximamente
+                            Portfolio personal
                         </h3>
 
                         <p>
-                            Mi primer proyecto estará disponible
-                            próximamente.
+                            Mi portfolio desarrollado desde cero
+                            utilizando HTML, CSS y JavaScript.
                         </p>
+
+                        <div class="project-tags">
+
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+
+                        </div>
 
                         <div class="project-links">
 
-                            <a href="#">
-                                Ver proyecto
+                            <a
+                                href="#"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                Demo →
                             </a>
 
-                            <a href="#">
-                                GitHub
+                            <a
+                                href="https://github.com/chechu-1984"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                GitHub →
                             </a>
 
                         </div>
@@ -177,30 +303,40 @@
                 </article>
 
 
+                <!-- PROYECTO 2 -->
+
                 <article class="project-card">
 
                     <div class="project-image">
-                        Proyecto 2
+                        <span>02</span>
                     </div>
 
-                    <div class="project-content">
+                    <div class="project-info">
+
+                        <p class="project-type">
+                            WEB DEVELOPMENT
+                        </p>
 
                         <h3>
-                            Próximamente
+                            Próximo proyecto
                         </h3>
 
                         <p>
-                            Un nuevo proyecto de desarrollo web.
+                            Proyecto realizado durante mi formación
+                            en desarrollo web.
                         </p>
+
+                        <div class="project-tags">
+
+                            <span>HTML</span>
+                            <span>CSS</span>
+
+                        </div>
 
                         <div class="project-links">
 
                             <a href="#">
-                                Ver proyecto
-                            </a>
-
-                            <a href="#">
-                                GitHub
+                                Próximamente →
                             </a>
 
                         </div>
@@ -210,31 +346,39 @@
                 </article>
 
 
+                <!-- PROYECTO 3 -->
+
                 <article class="project-card">
 
                     <div class="project-image">
-                        Proyecto 3
+                        <span>03</span>
                     </div>
 
-                    <div class="project-content">
+                    <div class="project-info">
+
+                        <p class="project-type">
+                            JAVASCRIPT
+                        </p>
 
                         <h3>
-                            Próximamente
+                            Próximo proyecto
                         </h3>
 
                         <p>
-                            Otro proyecto para seguir creciendo
-                            como desarrolladora.
+                            Proyecto JavaScript que agregaremos
+                            cuando avancemos con la práctica.
                         </p>
+
+                        <div class="project-tags">
+
+                            <span>JavaScript</span>
+
+                        </div>
 
                         <div class="project-links">
 
                             <a href="#">
-                                Ver proyecto
-                            </a>
-
-                            <a href="#">
-                                GitHub
+                                Próximamente →
                             </a>
 
                         </div>
@@ -250,38 +394,43 @@
 
         <!-- CONTACTO -->
 
-        <section id="contacto" class="contact">
+        <section class="section contact" id="contacto">
 
-            <div class="section-heading">
+            <div class="contact-content">
 
-                <p class="section-subtitle">
+                <p class="section-label">
                     CONTACTO
                 </p>
 
                 <h2>
-                    ¿Trabajamos juntos?
+                    ¿Hablamos?
                 </h2>
 
+                <p>
+                    Estoy construyendo mi camino como Web Developer
+                    y abierta a nuevas oportunidades para aprender,
+                    colaborar y crecer profesionalmente.
+                </p>
+
+                <a
+                    href="https://github.com/chechu-1984"
+                    class="btn btn-primary"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Ver mi GitHub
+                </a>
+
             </div>
-
-            <p>
-                Podés encontrarme a través de GitHub.
-            </p>
-
-            <a
-                href="https://github.com/chechu-1984"
-                class="btn btn-primary"
-                target="_blank"
-            >
-                Visitar mi GitHub
-            </a>
 
         </section>
 
     </main>
 
 
-    <!-- FOOTER -->
+    <!-- =========================
+         FOOTER
+    ========================== -->
 
     <footer class="footer">
 
@@ -289,7 +438,18 @@
             © 2026 Ceci Rodriguez
         </p>
 
+        <a
+            href="https://github.com/chechu-1984"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            GitHub
+        </a>
+
     </footer>
+
+
+    <script src="script.js"></script>
 
 </body>
 
