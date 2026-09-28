@@ -1,456 +1,258 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cecilia Rodríguez — Desarrollo Web</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #10142B;
+    --bg-alt: #181D3B;
+    --ink: #ECEFFB;
+    --ink-dim: #9AA1C7;
+    --accent: #E7FF52;
+    --line: #2A3060;
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: env(safe-area-inset-top, 0px); }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    overflow-x: hidden;
+  }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  a { color: inherit; }
+  .wrap { max-width: 780px; margin: 0 auto; padding: 0 28px; }
 
-    <meta
-        name="description"
-        content="Portfolio de Ceci Rodriguez, Web Developer en formación."
-    >
+  header.hero {
+    min-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    border-bottom: 1px solid var(--line);
+  }
+  .prompt {
+    color: var(--accent);
+    font-size: 0.9rem;
+    margin-bottom: 18px;
+    display: inline-block;
+  }
+  .prompt::after {
+    content: '▍';
+    animation: blink 1s step-end infinite;
+    margin-left: 2px;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+  h1.title {
+    font-size: clamp(2.4rem, 7vw, 4.4rem);
+    line-height: 1.05;
+    margin: 0 0 20px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .title em {
+    font-style: normal;
+    color: var(--accent);
+  }
+  .hero p.lede {
+    max-width: 54ch;
+    color: var(--ink-dim);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 0 0 32px;
+  }
+  .hero-links { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    text-decoration: none;
+    padding: 12px 20px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    transition: border-color .2s, color .2s;
+  }
+  .btn:hover { border-color: var(--accent); color: var(--accent); }
+  .btn.solid { background: var(--accent); color: #10142B; border-color: var(--accent); font-weight: 500; }
+  .btn.solid:hover { color: #10142B; opacity: 0.85; }
 
-    <title>Ceci Rodríguez | Web Developer</title>
+  section { padding: 90px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: none; }
+  h2.section-title {
+    font-size: 1.6rem;
+    margin: 0 0 46px;
+    font-weight: 700;
+  }
 
-    <link rel="stylesheet" href="style.css">
+  .timeline { position: relative; padding-left: 30px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 5px; top: 6px; bottom: 6px;
+    width: 1px;
+    background: var(--line);
+  }
+  .step { position: relative; margin-bottom: 42px; }
+  .step:last-child { margin-bottom: 0; }
+  .step::before {
+    content: '';
+    position: absolute;
+    left: -30px; top: 5px;
+    width: 11px; height: 11px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--ink-dim);
+  }
+  .step.now::before { border-color: var(--accent); background: var(--accent); }
+  .step .when { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--accent); display: block; margin-bottom: 6px; }
+  .step h3 { margin: 0 0 8px; font-size: 1.15rem; }
+  .step p { margin: 0; color: var(--ink-dim); line-height: 1.6; max-width: 56ch; }
+
+  .skills { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px,1fr)); gap: 14px; }
+  .skill {
+    border: 1px solid var(--line);
+    padding: 16px;
+    border-radius: 2px;
+    background: var(--bg-alt);
+  }
+  .skill .name { font-weight: 500; }
+  .skill .status { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent); }
+
+  .projects { display: flex; flex-direction: column; gap: 0; }
+  .project {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 20px;
+    padding: 22px 0;
+    border-top: 1px solid var(--line);
+  }
+  .project:first-child { border-top: none; }
+  .project h3 { margin: 0 0 6px; font-size: 1.1rem; }
+  .project p { margin: 0; color: var(--ink-dim); font-size: 0.95rem; max-width: 46ch; }
+  .project .tag { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--ink-dim); white-space: nowrap; }
+  .note {
+    margin-top: 30px;
+    font-size: 0.9rem;
+    color: var(--ink-dim);
+    font-family: 'JetBrains Mono', monospace;
+    border-left: 2px solid var(--accent);
+    padding-left: 14px;
+  }
+
+  footer {
+    padding: 70px 0 50px;
+    text-align: left;
+  }
+  footer h2.section-title { margin-bottom: 20px; }
+  footer p { color: var(--ink-dim); max-width: 50ch; line-height: 1.6; margin: 0 0 30px; }
+  footer .hero-links { margin-bottom: 40px; }
+  footer .fine { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--line); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .prompt::after { animation: none; }
+  }
+</style>
 </head>
-
 <body>
 
-    <!-- =========================
-         NAVBAR
-    ========================== -->
-
-    <header class="header">
-
-        <nav class="nav">
-
-            <a href="#inicio" class="logo">
-                Ceci Rodriguez
-            </a>
-
-            <button
-                class="menu-button"
-                id="menu-button"
-                aria-label="Abrir menú"
-            >
-                ☰
-            </button>
-
-            <ul class="nav-links" id="nav-links">
-
-                <li>
-                    <a href="#sobre-mi">Sobre mí</a>
-                </li>
-
-                <li>
-                    <a href="#tecnologias">Tecnologías</a>
-                </li>
-
-                <li>
-                    <a href="#proyectos">Proyectos</a>
-                </li>
-
-                <li>
-                    <a href="#contacto">Contacto</a>
-                </li>
-
-            </ul>
-
-        </nav>
-
-    </header>
-
-
-    <!-- =========================
-         CONTENIDO
-    ========================== -->
-
-    <main>
-
-        <!-- HERO -->
-
-        <section class="hero" id="inicio">
-
-            <div class="hero-content">
-
-                <p class="hero-tag">
-                    WEB DEVELOPER EN FORMACIÓN
-                </p>
-
-                <h1>
-                    Hola, soy <span>Ceci.</span>
-                </h1>
-
-                <p class="hero-description">
-                    Estoy formándome en desarrollo web y creando
-                    proyectos para convertir mis conocimientos en
-                    experiencias digitales funcionales y atractivas.
-                </p>
-
-                <div class="hero-buttons">
-
-                    <a href="#proyectos" class="btn btn-primary">
-                        Ver proyectos
-                    </a>
-
-                    <a
-                        href="https://github.com/cecy-1984"
-                        class="btn btn-secondary"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        GitHub
-                    </a>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- SOBRE MÍ -->
-
-        <section class="section about" id="sobre-mi">
-
-            <div class="section-heading">
-
-                <p class="section-label">
-                    SOBRE MÍ
-                </p>
-
-                <h2>
-                    Construyendo mi camino en desarrollo web
-                </h2>
-
-            </div>
-
-            <div class="about-content">
-
-                <p>
-                    Soy Ceci Rodriguez y actualmente estoy estudiando
-                    desarrollo web. Me interesa crear sitios modernos,
-                    funcionales y adaptables a diferentes dispositivos.
-                </p>
-
-                <p>
-                    Estoy desarrollando mis conocimientos en HTML, CSS
-                    y JavaScript, mientras practico creando proyectos
-                    reales que me permitan seguir creciendo como
-                    desarrolladora.
-                </p>
-
-                <p>
-                    Mi objetivo es continuar ampliando mis conocimientos
-                    y formar parte de proyectos donde pueda seguir
-                    aprendiendo y aportando mis habilidades.
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <!-- TECNOLOGÍAS -->
-
-        <section class="section technologies" id="tecnologias">
-
-            <div class="section-heading">
-
-                <p class="section-label">
-                    TECNOLOGÍAS
-                </p>
-
-                <h2>
-                    Herramientas que estoy aprendiendo
-                </h2>
-
-            </div>
-
-            <div class="technologies-grid">
-
-                <div class="technology-card">
-                    <span class="technology-number">01</span>
-                    <h3>HTML</h3>
-                    <p>Estructura y semántica web.</p>
-                </div>
-
-                <div class="technology-card">
-                    <span class="technology-number">02</span>
-                    <h3>CSS</h3>
-                    <p>Diseño, estilos y layouts.</p>
-                </div>
-
-                <div class="technology-card">
-                    <span class="technology-number">03</span>
-                    <h3>JavaScript</h3>
-                    <p>Interactividad y lógica.</p>
-                </div>
-
-                <div class="technology-card">
-                    <span class="technology-number">04</span>
-                    <h3>Git</h3>
-                    <p>Control de versiones.</p>
-                </div>
-
-                <div class="technology-card">
-                    <span class="technology-number">05</span>
-                    <h3>GitHub</h3>
-                    <p>Repositorios y proyectos.</p>
-                </div>
-
-                <div class="technology-card">
-                    <span class="technology-number">06</span>
-                    <h3>Responsive Design</h3>
-                    <p>Interfaces adaptables.</p>
-                </div>
-
-            </div>
-
-            <div class="language-card">
-
-                <div>
-                    <span class="technology-number">
-                        IDIOMA
-                    </span>
-
-                    <h3>
-                        Inglés avanzado
-                    </h3>
-                </div>
-
-                <span class="language-level">
-                    Advanced English
-                </span>
-
-            </div>
-
-        </section>
-
-
-        <!-- PROYECTOS -->
-
-        <section class="section projects" id="proyectos">
-
-            <div class="section-heading">
-
-                <p class="section-label">
-                    PROYECTOS
-                </p>
-
-                <h2>
-                    Proyectos que estoy construyendo
-                </h2>
-
-            </div>
-
-            <div class="projects-grid">
-
-                <!-- PROYECTO 1 -->
-
-                <article class="project-card">
-
-                    <div class="project-image">
-                        <span>01</span>
-                    </div>
-
-                    <div class="project-info">
-
-                        <p class="project-type">
-                            WEB DEVELOPMENT
-                        </p>
-
-                        <h3>
-                            Portfolio personal
-                        </h3>
-
-                        <p>
-                            Mi portfolio desarrollado desde cero
-                            utilizando HTML, CSS y JavaScript.
-                        </p>
-
-                        <div class="project-tags">
-
-                            <span>HTML</span>
-                            <span>CSS</span>
-                            <span>JavaScript</span>
-
-                        </div>
-
-                        <div class="project-links">
-
-                            <a
-                                href="#"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                Demo →
-                            </a>
-
-                            <a
-                                href="https://github.com/cecy-1984"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                GitHub →
-                            </a>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- PROYECTO 2 -->
-
-                <article class="project-card">
-
-                    <div class="project-image">
-                        <span>02</span>
-                    </div>
-
-                    <div class="project-info">
-
-                        <p class="project-type">
-                            WEB DEVELOPMENT
-                        </p>
-
-                        <h3>
-                            Próximo proyecto
-                        </h3>
-
-                        <p>
-                            Proyecto realizado durante mi formación
-                            en desarrollo web.
-                        </p>
-
-                        <div class="project-tags">
-
-                            <span>HTML</span>
-                            <span>CSS</span>
-
-                        </div>
-
-                        <div class="project-links">
-
-                            <a href="#">
-                                Próximamente →
-                            </a>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-                <!-- PROYECTO 3 -->
-
-                <article class="project-card">
-
-                    <div class="project-image">
-                        <span>03</span>
-                    </div>
-
-                    <div class="project-info">
-
-                        <p class="project-type">
-                            JAVASCRIPT
-                        </p>
-
-                        <h3>
-                            Próximo proyecto
-                        </h3>
-
-                        <p>
-                            Proyecto JavaScript que agregaremos
-                            cuando avancemos con la práctica.
-                        </p>
-
-                        <div class="project-tags">
-
-                            <span>JavaScript</span>
-
-                        </div>
-
-                        <div class="project-links">
-
-                            <a href="#">
-                                Próximamente →
-                            </a>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-            </div>
-
-        </section>
-
-
-        <!-- CONTACTO -->
-
-        <section class="section contact" id="contacto">
-
-            <div class="contact-content">
-
-                <p class="section-label">
-                    CONTACTO
-                </p>
-
-                <h2>
-                    ¿Hablamos?
-                </h2>
-
-                <p>
-                    Estoy construyendo mi camino como Web Developer
-                    y abierta a nuevas oportunidades para aprender,
-                    colaborar y crecer profesionalmente.
-                </p>
-
-                <a
-                    href="https://github.com/cecy-1984"
-                    class="btn btn-primary"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Ver mi GitHub
-                </a>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <!-- =========================
-         FOOTER
-    ========================== -->
-
-    <footer class="footer">
-
-        <p>
-            © 2026 Ceci Rodriguez
-        </p>
-
-        <a
-            href="https://github.com/cecy-1984"
-            target="_blank"
-            rel="noopener noreferrer"
-        >
-            GitHub
-        </a>
-
-    </footer>
-
-
-    <script src="script.js"></script>
+<header class="hero">
+  <div class="wrap">
+    <span class="prompt mono">cecy-1984 $ whoami</span>
+    <h1 class="title">Cecilia Rodríguez,<br>construyendo su <em>primera</em> web.</h1>
+    <p class="lede">Estudiante de Desarrollo Web en el Instituto Superior Santa Rosa de Calamuchita. Primer año, y en camino desde el profesorado de inglés hasta el código.</p>
+    <div class="hero-links">
+      <a class="btn solid" href="#contacto">Escribime</a>
+      <a class="btn" href="https://github.com/cecy-1984" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</header>
+
+<section id="historia">
+  <div class="wrap">
+    <h2 class="section-title">Cómo llegué acá</h2>
+    <div class="timeline">
+      <div class="step">
+        <span class="when mono">Antes</span>
+        <h3>Profesorado de inglés</h3>
+        <p>Estudié para ser profesora de inglés, pero terminé descubriendo que no era mi camino.</p>
+      </div>
+      <div class="step">
+        <span class="when mono">El quiebre</span>
+        <h3>WordPress y un foro</h3>
+        <p>Empecé a armar páginas en WordPress y a venderlas en un foro. Ahí nació el interés real por programar.</p>
+      </div>
+      <div class="step now">
+        <span class="when mono">2026 — hoy</span>
+        <h3>Desarrollo Web, primer año</h3>
+        <p>Aproveché la oportunidad y arranqué la carrera en el Instituto Superior Santa Rosa de Calamuchita. Esta página es parte de lo que voy aprendiendo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <h2 class="section-title">En qué estoy metiendo mano</h2>
+    <div class="skills">
+      <div class="skill"><div class="name">HTML</div><div class="status">aprendiendo</div></div>
+      <div class="skill"><div class="name">CSS</div><div class="status">aprendiendo</div></div>
+      <div class="skill"><div class="name">JavaScript</div><div class="status">primeros pasos</div></div>
+      <div class="skill"><div class="name">WordPress</div><div class="status">ya lo uso</div></div>
+      <div class="skill"><div class="name">Git &amp; GitHub</div><div class="status">aprendiendo</div></div>
+      <div class="skill"><div class="name">Inglés</div><div class="status">nivel avanzado</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="proyectos">
+  <div class="wrap">
+    <h2 class="section-title">Ejercicios del instituto</h2>
+    <div class="projects">
+      <div class="project">
+        <div>
+          <h3>Página de práctica en HTML/CSS</h3>
+          <p>Primer ejercicio de maquetado: estructura semántica y estilos base.</p>
+        </div>
+        <span class="tag">HTML · CSS</span>
+      </div>
+      <div class="project">
+        <div>
+          <h3>Formulario de contacto</h3>
+          <p>Práctica de formularios, validación básica y estilos de inputs.</p>
+        </div>
+        <span class="tag">HTML · CSS</span>
+      </div>
+      <div class="project">
+        <div>
+          <h3>Tarjeta de perfil interactiva</h3>
+          <p>Componente con estados hover y algo de JavaScript para interacción.</p>
+        </div>
+        <span class="tag">HTML · CSS · JS</span>
+      </div>
+    </div>
+    <p class="note">Voy a ir subiendo estos ejercicios a GitHub a medida que los termine. Este bloque lo actualizo con los links reales apenas los suba.</p>
+  </div>
+</section>
+
+<footer id="contacto">
+  <div class="wrap">
+    <h2 class="section-title">Hablemos</h2>
+    <p>Recién empiezo, pero ya estoy con ganas de aprender, sumar experiencia y construir cosas. Si querés escribirme, estas son mis vías.</p>
+    <div class="hero-links">
+      <a class="btn solid" href="mailto:cbrodriguez2019@gmail.com">cbrodriguez2019@gmail.com</a>
+      <a class="btn" href="https://github.com/cecy-1984" target="_blank" rel="noopener">github.com/cecy-1984</a>
+    </div>
+    <span class="fine">Instituto Superior Santa Rosa de Calamuchita · Desarrollo Web · 2026</span>
+  </div>
+</footer>
 
 </body>
-
 </html>
