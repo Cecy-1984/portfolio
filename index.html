@@ -138,6 +138,9 @@
   .project h3 { margin: 0 0 6px; font-size: 1.1rem; }
   .project p { margin: 0; color: var(--ink-dim); font-size: 0.95rem; max-width: 46ch; }
   .project .tag { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--ink-dim); white-space: nowrap; }
+  .project .project-links { margin-top: 12px; }
+  .project .project-links a { color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; text-decoration: none; }
+  .project .project-links a:hover { text-decoration: underline; }
   .note {
     margin-top: 30px;
     font-size: 0.9rem;
@@ -155,6 +158,10 @@
   footer p { color: var(--ink-dim); max-width: 50ch; line-height: 1.6; margin: 0 0 30px; }
   footer .hero-links { margin-bottom: 40px; }
   footer .fine { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--line); }
+
+  @media (max-width: 560px) {
+    .project { flex-direction: column; align-items: flex-start; }
+  }
 
   @media (prefers-reduced-motion: reduce) {
     .prompt::after { animation: none; }
@@ -237,8 +244,20 @@
         </div>
         <span class="tag">HTML · CSS · JS</span>
       </div>
+      <div class="project">
+        <div>
+          <h3>Menú Digital de Restó</h3>
+          <p>Aplicación desarrollada con React y Vite. Incluye tarjetas de platos, precios formateados, disponibilidad, etiquetas y resumen del menú.</p>
+          <p class="project-links">
+            <a href="https://cecy-1984.github.io/menu-digital-resto/" target="_blank" rel="noopener noreferrer">Ver demo ↗</a>
+            &nbsp;·&nbsp;
+            <a href="https://github.com/Cecy-1984/menu-digital-resto" target="_blank" rel="noopener noreferrer">Ver código ↗</a>
+          </p>
+        </div>
+        <span class="tag">React · Vite · CSS</span>
+      </div>
     </div>
-    <p class="note">Voy a ir subiendo estos ejercicios a GitHub a medida que los termine. Este bloque lo actualizo con los links reales apenas los suba.</p>
+    <p class="note">Estos son algunos de los proyectos y ejercicios que voy desarrollando durante mi formación.</p>
   </div>
 </section>
 
