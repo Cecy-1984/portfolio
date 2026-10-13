@@ -1,345 +1,516 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Cecilia Rodríguez — De crear sitios a escribir código</title>
-<meta name="description" content="Portfolio de Cecilia Rodríguez: experiencia creando sitios con WordPress y formación en desarrollo web con HTML, CSS, JavaScript y React.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #10142B;
-    --bg-alt: #181D3B;
-    --ink: #ECEFFB;
-    --ink-dim: #9AA1C7;
-    --accent: #E7FF52;
-    --line: #2A3060;
-    font-family: 'Space Grotesk', system-ui, sans-serif;
-  }
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; scroll-padding-top: env(safe-area-inset-top, 0px); }
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--ink);
-    padding-top: env(safe-area-inset-top, 0px);
-    padding-bottom: env(safe-area-inset-bottom, 0px);
-    overflow-x: hidden;
-  }
-  .mono { font-family: 'JetBrains Mono', monospace; }
-  a { color: inherit; }
-  .wrap { max-width: 780px; margin: 0 auto; padding: 0 28px; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#080b17">
+  <meta name="description" content="Portfolio de Cecilia Rodríguez: experiencia creando y vendiendo sitios WordPress, y formación actual en desarrollo web con HTML, CSS, JavaScript y React.">
+  <title>Cecilia Rodríguez — De crear sitios a escribir código</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #080b17;
+      --bg-soft: #0d1223;
+      --panel: rgba(18, 25, 46, .86);
+      --panel-strong: #11182b;
+      --ink: #f2f5ff;
+      --muted: #9ca8c5;
+      --dim: #6f7b9a;
+      --lime: #dfff67;
+      --violet: #b6a6ff;
+      --cyan: #80e7ed;
+      --line: rgba(158, 177, 222, .18);
+      --mono: 'DM Mono', monospace;
+      --sans: 'Space Grotesk', system-ui, sans-serif;
+      --radius: 22px;
+      font-family: var(--sans);
+      scroll-behavior: smooth;
+      scroll-padding-top: 92px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      min-width: 320px;
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(ellipse at 82% 8%, rgba(120, 100, 255, .14), transparent 30rem),
+        radial-gradient(ellipse at 0% 36%, rgba(70, 220, 220, .07), transparent 27rem),
+        var(--bg);
+      overflow-x: hidden;
+    }
+    body::before {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      content: '';
+      pointer-events: none;
+      opacity: .22;
+      background-image: linear-gradient(rgba(144, 164, 219, .07) 1px, transparent 1px), linear-gradient(90deg, rgba(144, 164, 219, .07) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(to bottom, black, transparent 92%);
+    }
+    a { color: inherit; }
+    button { font: inherit; }
+    .mono { font-family: var(--mono); }
+    .wrap { width: min(1120px, calc(100% - 48px)); margin-inline: auto; }
 
-  header.hero {
-    min-height: 92vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: relative;
-    border-bottom: 1px solid var(--line);
-  }
-  .lang-toggle {
-    position: absolute;
-    top: 24px;
-    right: max(20px, calc((100vw - 780px) / 2 + 28px));
-    z-index: 2;
-    padding: 9px 13px;
-    border: 1px solid var(--line);
-    border-radius: 2px;
-    background: var(--bg-alt);
-    color: var(--accent);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.8rem;
-    font-weight: 500;
-    cursor: pointer;
-  }
-  .lang-toggle:hover { border-color: var(--accent); }
-  .lang-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-  .project-status {
-    color: var(--ink-dim);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.82rem;
-  }
-  .prompt {
-    color: var(--accent);
-    font-size: 0.9rem;
-    margin-bottom: 18px;
-    display: inline-block;
-  }
-  .prompt::after {
-    content: '▍';
-    animation: blink 1s step-end infinite;
-    margin-left: 2px;
-  }
-  @keyframes blink { 50% { opacity: 0; } }
-  h1.title {
-    font-size: clamp(2.4rem, 7vw, 4.4rem);
-    line-height: 1.05;
-    margin: 0 0 20px;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-  }
-  .title em {
-    font-style: normal;
-    color: var(--accent);
-  }
-  .hero p.lede {
-    max-width: 54ch;
-    color: var(--ink-dim);
-    font-size: 1.1rem;
-    line-height: 1.6;
-    margin: 0 0 32px;
-  }
-  .hero-links { display: flex; gap: 14px; flex-wrap: wrap; }
-  .btn {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.85rem;
-    text-decoration: none;
-    padding: 12px 20px;
-    border: 1px solid var(--line);
-    border-radius: 2px;
-    transition: border-color .2s, color .2s;
-  }
-  .btn:hover { border-color: var(--accent); color: var(--accent); }
-  .btn.solid { background: var(--accent); color: #10142B; border-color: var(--accent); font-weight: 500; }
-  .btn.solid:hover { color: #10142B; opacity: 0.85; }
+    /* Navigation */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(158, 177, 222, .12);
+      background: rgba(8, 11, 23, .78);
+      backdrop-filter: blur(18px);
+    }
+    .nav-inner { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 22px; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; text-decoration: none; font-weight: 700; letter-spacing: -.04em; white-space: nowrap; }
+    .brand-mark {
+      width: 37px; height: 37px; display: grid; place-items: center; border-radius: 12px;
+      background: var(--lime); color: #111629; font-size: .79rem; font-weight: 700; letter-spacing: -.04em;
+      box-shadow: 0 0 28px rgba(223, 255, 103, .16);
+    }
+    .brand span:last-child { font-size: .98rem; }
+    .nav-links { display: flex; align-items: center; gap: clamp(14px, 2.5vw, 28px); }
+    .nav-links a { color: var(--muted); font-family: var(--mono); font-size: .74rem; text-decoration: none; transition: color .2s ease; }
+    .nav-links a:hover { color: var(--lime); }
+    .lang-toggle { display: inline-flex; align-items: center; gap: 7px; padding: 9px 12px; border: 1px solid var(--line); border-radius: 999px; color: var(--lime); background: rgba(18, 25, 46, .7); font-family: var(--mono); font-size: .75rem; cursor: pointer; transition: border-color .2s, transform .2s; }
+    .lang-toggle:hover { border-color: var(--lime); transform: translateY(-1px); }
+    .lang-toggle:focus-visible, a:focus-visible, button:focus-visible { outline: 2px solid var(--lime); outline-offset: 4px; }
 
-  section { padding: 90px 0; border-bottom: 1px solid var(--line); }
-  section:last-of-type { border-bottom: none; }
-  h2.section-title {
-    font-size: 1.6rem;
-    margin: 0 0 46px;
-    font-weight: 700;
-  }
+    /* Hero */
+    .hero { position: relative; padding: clamp(74px, 10vw, 132px) 0 82px; border-bottom: 1px solid var(--line); }
+    .hero-grid { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(340px, .92fr); align-items: center; gap: clamp(34px, 6vw, 78px); }
+    .eyebrow { display: inline-flex; align-items: center; gap: 10px; margin: 0 0 24px; color: var(--lime); font: .76rem var(--mono); letter-spacing: .05em; text-transform: uppercase; }
+    .status-dot { width: 8px; height: 8px; display: inline-block; border-radius: 50%; background: var(--lime); box-shadow: 0 0 14px rgba(223, 255, 103, .75); }
+    h1 { max-width: 720px; margin: 0; font-size: clamp(3rem, 6.7vw, 5.75rem); line-height: .99; letter-spacing: -.075em; font-weight: 700; }
+    h1 .accent { color: var(--lime); }
+    h1 .soft-accent { color: var(--violet); }
+    .hero-copy { max-width: 600px; margin: 25px 0 0; color: var(--muted); font-size: clamp(1rem, 1.4vw, 1.1rem); line-height: 1.8; }
+    .hero-copy strong { color: var(--ink); font-weight: 600; }
+    .hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+    .button { min-height: 46px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 0 18px; border: 1px solid var(--line); border-radius: 12px; background: rgba(18, 25, 46, .65); color: var(--ink); text-decoration: none; font: .79rem var(--mono); transition: transform .2s ease, border-color .2s ease, background .2s ease; }
+    .button:hover { transform: translateY(-2px); border-color: var(--violet); }
+    .button.primary { border-color: var(--lime); background: var(--lime); color: #111629; font-weight: 500; box-shadow: 0 8px 30px rgba(223, 255, 103, .12); }
+    .button.primary:hover { background: #ebff9a; border-color: #ebff9a; }
+    .button svg { width: 16px; height: 16px; }
+    .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 27px; }
+    .pill { display: inline-flex; align-items: center; gap: 7px; padding: 7px 10px; border: 1px solid var(--line); border-radius: 999px; color: #b9c3de; font: .68rem var(--mono); background: rgba(255,255,255,.025); }
+    .pill b { color: var(--cyan); font-weight: 400; }
 
-  .timeline { position: relative; padding-left: 30px; }
-  .timeline::before {
-    content: '';
-    position: absolute;
-    left: 5px; top: 6px; bottom: 6px;
-    width: 1px;
-    background: var(--line);
-  }
-  .step { position: relative; margin-bottom: 42px; }
-  .step:last-child { margin-bottom: 0; }
-  .step::before {
-    content: '';
-    position: absolute;
-    left: -30px; top: 5px;
-    width: 11px; height: 11px;
-    border-radius: 50%;
-    background: var(--bg);
-    border: 2px solid var(--ink-dim);
-  }
-  .step.now::before { border-color: var(--accent); background: var(--accent); }
-  .step .when { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--accent); display: block; margin-bottom: 6px; }
-  .step h3 { margin: 0 0 8px; font-size: 1.15rem; }
-  .step p { margin: 0; color: var(--ink-dim); line-height: 1.6; max-width: 56ch; }
+    /* Code window */
+    .code-window { position: relative; min-width: 0; padding: 1px; border: 1px solid rgba(182, 166, 255, .3); border-radius: 19px; background: linear-gradient(145deg, rgba(182,166,255,.17), rgba(128,231,237,.04) 46%, rgba(223,255,103,.1)); box-shadow: 0 28px 90px rgba(0, 0, 0, .32), 0 0 70px rgba(140, 120, 255, .06); transform: rotate(1.2deg); }
+    .code-inner { overflow: hidden; border-radius: 18px; background: #0d1222; }
+    .window-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 15px 17px; border-bottom: 1px solid var(--line); background: rgba(255,255,255,.018); }
+    .window-dots { display: flex; gap: 6px; }
+    .window-dots i { width: 8px; height: 8px; border-radius: 50%; background: #ff7e91; }
+    .window-dots i:nth-child(2) { background: #fbd36b; }
+    .window-dots i:nth-child(3) { background: #8be5a0; }
+    .window-filename { color: #aeb8d2; font: .68rem var(--mono); }
+    .live-label { color: var(--lime); font: .62rem var(--mono); text-transform: uppercase; letter-spacing: .05em; }
+    .code-tabs { display: flex; gap: 4px; padding: 12px 15px 0; }
+    .code-tab { padding: 7px 10px; border: 1px solid transparent; border-radius: 7px 7px 0 0; color: var(--dim); background: transparent; font: .68rem var(--mono); cursor: pointer; }
+    .code-tab[aria-selected="true"] { color: var(--lime); border-color: var(--line); border-bottom-color: #0d1222; background: #11182b; }
+    .code-body { min-height: 236px; padding: 20px 17px 18px; border-top: 1px solid var(--line); color: #d6def4; font: clamp(.67rem, 1.1vw, .8rem)/1.95 var(--mono); overflow-x: auto; }
+    .code-line { display: block; white-space: pre; }
+    .ln { display: inline-block; width: 27px; padding-right: 12px; color: #4c5976; text-align: right; user-select: none; }
+    .kw { color: #c5a7ff; }
+    .var { color: #8be4ef; }
+    .str { color: #dfff67; }
+    .fn { color: #ffd18a; }
+    .code-foot { display: flex; justify-content: space-between; gap: 16px; padding: 12px 17px; border-top: 1px solid var(--line); color: #74809e; font: .64rem var(--mono); }
+    .code-foot span:last-child { color: var(--cyan); }
 
-  .skills { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px,1fr)); gap: 14px; }
-  .skill {
-    border: 1px solid var(--line);
-    padding: 16px;
-    border-radius: 2px;
-    background: var(--bg-alt);
-  }
-  .skill .name { font-weight: 500; }
-  .skill .status { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent); }
+    /* Shared sections */
+    section { padding: clamp(68px, 9vw, 108px) 0; border-bottom: 1px solid var(--line); }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 36px; }
+    .section-kicker { margin: 0 0 11px; color: var(--violet); font: .71rem var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+    h2 { margin: 0; font-size: clamp(1.85rem, 3.3vw, 2.65rem); line-height: 1.1; letter-spacing: -.055em; }
+    .section-aside { max-width: 250px; margin: 0; color: var(--dim); font: .7rem/1.65 var(--mono); text-align: right; }
 
-  .projects { display: flex; flex-direction: column; gap: 0; }
-  .project {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 20px;
-    padding: 22px 0;
-    border-top: 1px solid var(--line);
-  }
-  .project:first-child { border-top: none; }
-  .project h3 { margin: 0 0 6px; font-size: 1.1rem; }
-  .project p { margin: 0; color: var(--ink-dim); font-size: 0.95rem; max-width: 46ch; }
-  .project .tag { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--ink-dim); white-space: nowrap; }
-  .project .project-links { margin-top: 12px; }
-  .project .project-links a { color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; text-decoration: none; }
-  .project .project-links a:hover { text-decoration: underline; }
-  .note {
-    margin-top: 30px;
-    font-size: 0.9rem;
-    color: var(--ink-dim);
-    font-family: 'JetBrains Mono', monospace;
-    border-left: 2px solid var(--accent);
-    padding-left: 14px;
-  }
+    /* Journey */
+    .journey-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .journey-card { position: relative; min-height: 250px; padding: 24px; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius); background: linear-gradient(150deg, rgba(18,25,46,.9), rgba(13,18,35,.75)); }
+    .journey-card::after { position: absolute; right: -32px; bottom: -45px; width: 115px; height: 115px; border: 1px solid rgba(182,166,255,.15); border-radius: 50%; content: ''; box-shadow: 0 0 0 17px rgba(182,166,255,.025), 0 0 0 35px rgba(182,166,255,.018); }
+    .journey-num { display: block; margin-bottom: 36px; color: var(--lime); font: .75rem var(--mono); }
+    .journey-card h3 { margin: 0 0 11px; font-size: 1.18rem; letter-spacing: -.03em; }
+    .journey-card p { position: relative; z-index: 1; margin: 0; color: var(--muted); font-size: .91rem; line-height: 1.75; }
+    .journey-card:nth-child(2) { border-color: rgba(182,166,255,.25); }
+    .journey-card:nth-child(2) .journey-num { color: var(--violet); }
+    .journey-card:nth-child(3) { background: linear-gradient(145deg, rgba(223,255,103,.08), rgba(18,25,46,.75) 60%); }
 
-  footer {
-    padding: 70px 0 50px;
-    text-align: left;
-  }
-  footer h2.section-title { margin-bottom: 20px; }
-  footer p { color: var(--ink-dim); max-width: 50ch; line-height: 1.6; margin: 0 0 30px; }
-  footer .hero-links { margin-bottom: 40px; }
-  footer .fine { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--line); }
+    /* Skills */
+    .skills-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+    .skill-card { position: relative; min-height: 145px; padding: 19px; border: 1px solid var(--line); border-radius: 17px; background: rgba(17,24,43,.72); transition: transform .22s ease, border-color .22s ease, background .22s ease; }
+    .skill-card:hover { transform: translateY(-4px); border-color: rgba(223,255,103,.4); background: rgba(22,31,53,.9); }
+    .skill-icon { width: 36px; height: 36px; display: grid; place-items: center; margin-bottom: 16px; border: 1px solid var(--line); border-radius: 11px; background: rgba(255,255,255,.035); color: var(--cyan); font: .72rem var(--mono); }
+    .skill-card:nth-child(2) .skill-icon, .skill-card:nth-child(4) .skill-icon { color: var(--violet); }
+    .skill-card h3 { margin: 0 0 8px; font-size: .98rem; }
+    .skill-card p { margin: 0; color: var(--lime); font: .66rem/1.5 var(--mono); }
+    .skill-card .skill-desc { margin-top: 9px; color: var(--dim); font: .78rem/1.55 var(--sans); }
+    .skills-note { margin: 18px 0 0; color: var(--dim); font: .7rem/1.7 var(--mono); }
 
-  @media (max-width: 560px) {
-    .project { flex-direction: column; align-items: flex-start; }
-  }
+    /* Projects */
+    .projects-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .project-card { display: flex; flex-direction: column; min-height: 340px; padding: 25px; border: 1px solid var(--line); border-radius: var(--radius); background: linear-gradient(155deg, rgba(20,28,51,.94), rgba(12,17,32,.94)); transition: transform .24s ease, border-color .24s ease, box-shadow .24s ease; }
+    .project-card:hover { transform: translateY(-5px); border-color: rgba(182,166,255,.5); box-shadow: 0 18px 48px rgba(0,0,0,.22); }
+    .project-top { display: flex; align-items: center; justify-content: space-between; gap: 15px; margin-bottom: 34px; }
+    .project-symbol { width: 47px; height: 47px; display: grid; place-items: center; border: 1px solid rgba(223,255,103,.2); border-radius: 14px; background: rgba(223,255,103,.07); color: var(--lime); font: 1rem var(--mono); }
+    .project-number { color: #586580; font: .73rem var(--mono); }
+    .project-card h3 { margin: 0 0 12px; font-size: 1.35rem; letter-spacing: -.04em; }
+    .project-card > p { margin: 0; color: var(--muted); font-size: .92rem; line-height: 1.75; }
+    .project-tech { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 20px; }
+    .project-tech span { padding: 6px 9px; border: 1px solid var(--line); border-radius: 7px; color: #acb9d8; font: .65rem var(--mono); }
+    .project-links { display: flex; align-items: center; flex-wrap: wrap; gap: 10px 16px; margin-top: auto; padding-top: 25px; }
+    .project-links a { color: var(--lime); font: .74rem var(--mono); text-decoration: none; }
+    .project-links a:hover { text-decoration: underline; text-underline-offset: 5px; }
+    .project-links .coming-soon { color: var(--dim); font: .7rem var(--mono); }
 
-  @media (prefers-reduced-motion: reduce) {
-    .prompt::after { animation: none; }
-  }
-</style>
+    /* Contact */
+    .contact-panel { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 32px; padding: clamp(28px, 5vw, 50px); overflow: hidden; border: 1px solid rgba(223,255,103,.25); border-radius: 26px; background: radial-gradient(circle at 100% 0, rgba(182,166,255,.16), transparent 24rem), linear-gradient(130deg, rgba(223,255,103,.065), rgba(18,25,46,.8) 52%); }
+    .contact-panel h2 { max-width: 600px; }
+    .contact-panel p { max-width: 590px; margin: 17px 0 0; color: var(--muted); line-height: 1.75; }
+    .contact-actions { display: flex; flex-direction: column; gap: 10px; align-items: stretch; }
+    .contact-actions .button { white-space: nowrap; }
+    footer { padding: 25px 0 35px; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 15px; color: var(--dim); font: .68rem var(--mono); }
+    .footer-inner a { color: var(--muted); text-decoration: none; }
+    .footer-inner a:hover { color: var(--lime); }
+    .toast { position: fixed; left: 50%; bottom: 24px; z-index: 50; padding: 12px 17px; border: 1px solid rgba(223,255,103,.3); border-radius: 12px; background: #141c2e; color: var(--lime); font: .75rem var(--mono); box-shadow: 0 12px 35px rgba(0,0,0,.4); opacity: 0; transform: translate(-50%, 12px); pointer-events: none; transition: opacity .2s ease, transform .2s ease; }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+    /* Reveal on scroll, enabled only when JavaScript runs */
+    .js .reveal { opacity: 0; transform: translateY(18px); transition: opacity .65s ease, transform .65s ease; }
+    .js .reveal.is-visible { opacity: 1; transform: translateY(0); }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      .js .reveal { opacity: 1; transform: none; }
+    }
+    @media (max-width: 950px) {
+      .hero-grid { grid-template-columns: minmax(0, 1fr); }
+      .hero-copy { max-width: 680px; }
+      .code-window { width: min(100%, 620px); margin: 12px auto 0; transform: none; }
+      .journey-grid { grid-template-columns: 1fr; }
+      .journey-card { min-height: auto; }
+      .journey-num { margin-bottom: 22px; }
+      .skills-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+    @media (max-width: 700px) {
+      .wrap { width: min(100% - 32px, 560px); }
+      .nav-inner { min-height: 67px; gap: 12px; }
+      .nav-links { display: none; }
+      .brand span:last-child { font-size: .9rem; }
+      .hero { padding: 74px 0 62px; }
+      h1 { font-size: clamp(3rem, 13vw, 5rem); }
+      .hero-copy { font-size: 1rem; }
+      .section-head { display: block; }
+      .section-aside { margin-top: 12px; text-align: left; }
+      .skills-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .projects-grid { grid-template-columns: 1fr; }
+      .project-card { min-height: 315px; }
+      .contact-panel { grid-template-columns: minmax(0, 1fr); }
+      .contact-actions { align-items: flex-start; }
+      .footer-inner { align-items: flex-start; flex-direction: column; }
+    }
+    @media (max-width: 390px) {
+      .wrap { width: min(100% - 24px, 560px); }
+      .hero-actions { align-items: stretch; flex-direction: column; }
+      .hero-actions .button { width: 100%; }
+      .skills-grid { gap: 9px; }
+      .skill-card { padding: 14px; }
+      .code-body { padding-inline: 8px; font-size: .64rem; }
+      .ln { width: 22px; padding-right: 8px; }
+    }
+  </style>
 </head>
 <body>
-
-<header class="hero">
-  <button class="lang-toggle" id="lang-toggle" type="button" aria-label="Switch to English">EN</button>
-  <div class="wrap">
-    <span class="prompt mono">cecy-1984 $ whoami</span>
-    <h1 class="title">Cecilia Rodríguez,<br><span data-es="de crear sitios a " data-en="from building websites to ">de crear sitios a </span><em data-es="escribir código" data-en="writing code">escribir código</em><span data-es="." data-en=".">.</span></h1>
-    <p class="lede" data-es="Durante la pandemia empecé a crear y vender sitios en WordPress; algunos llegaron a generar mucho tráfico y fueron monetizados. Esa experiencia me llevó a explorar HTML y CSS y, finalmente, a estudiar Desarrollo Web." data-en="During the pandemic, I started building and selling WordPress websites; some attracted significant traffic and were monetized. That experience led me to explore HTML and CSS and eventually pursue Web Development studies.">Durante la pandemia empecé a crear y vender sitios en WordPress; algunos llegaron a generar mucho tráfico y fueron monetizados. Esa experiencia me llevó a explorar HTML y CSS y, finalmente, a estudiar Desarrollo Web.</p>
-    <div class="hero-links">
-      <a class="btn solid" href="#contacto" data-es="Escribime" data-en="Get in touch">Escribime</a>
-      <a class="btn" href="https://github.com/cecy-1984" target="_blank" rel="noopener">GitHub</a>
+  <nav class="topbar" aria-label="Main navigation">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#inicio" aria-label="Cecilia Rodríguez, inicio">
+        <span class="brand-mark">CR</span><span>cecilia<span style="color:var(--lime)">.dev</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="#historia" data-es="MI CAMINO" data-en="MY JOURNEY">MI CAMINO</a>
+        <a href="#skills" data-es="TECNOLOGÍAS" data-en="TOOLKIT">TECNOLOGÍAS</a>
+        <a href="#proyectos" data-es="PROYECTOS" data-en="PROJECTS">PROYECTOS</a>
+        <a href="#contacto" data-es="CONTACTO" data-en="CONTACT">CONTACTO</a>
+      </div>
+      <button class="lang-toggle" id="lang-toggle" type="button" aria-label="Switch to English">EN <span aria-hidden="true">↗</span></button>
     </div>
-  </div>
-</header>
+  </nav>
 
-<section id="historia">
-  <div class="wrap">
-    <h2 class="section-title" data-es="El camino hasta el código" data-en="The path to code">El camino hasta el código</h2>
-    <div class="timeline">
-      <div class="step">
-        <span class="when mono" data-es="El comienzo" data-en="The beginning">El comienzo</span>
-        <h3 data-es="Inglés y experiencia bilingüe" data-en="English and bilingual work">Inglés y experiencia bilingüe</h3>
-        <p data-es="Estudié profesorado de inglés y trabajé en distintos call centers bilingües. Con el tiempo entendí que quería orientar mi camino hacia algo diferente." data-en="I studied English teacher training and worked at several bilingual call centers. Over time, I realized I wanted to take my career in a different direction.">Estudié profesorado de inglés y trabajé en distintos call centers bilingües. Con el tiempo entendí que quería orientar mi camino hacia algo diferente.</p>
+  <header class="hero" id="inicio">
+    <div class="wrap hero-grid">
+      <div class="hero-main reveal">
+        <p class="eyebrow"><span class="status-dot"></span><span data-es="WordPress → Desarrollo web" data-en="WordPress → Web development">WordPress → Desarrollo web</span></p>
+        <h1><span data-es="De crear sitios" data-en="From building websites">De crear sitios</span><br><span class="accent" data-es="a escribir código." data-en="to writing code.">a escribir código.</span></h1>
+        <p class="hero-copy" data-es="Soy Cecilia. Durante la pandemia empecé a crear y vender sitios con WordPress; algunos llegaron a tener mucho tráfico y monetización. Esa experiencia me llevó a explorar HTML y CSS y a estudiar Desarrollo Web para entender y construir cada vez más desde el código." data-en="I’m Cecilia. During the pandemic, I started building and selling WordPress websites; some attracted significant traffic and were monetized. That experience led me to explore HTML and CSS and study web development so I can understand and build more directly with code.">Soy Cecilia. Durante la pandemia empecé a crear y vender sitios con WordPress; algunos llegaron a tener mucho tráfico y monetización. Esa experiencia me llevó a explorar HTML y CSS y a estudiar Desarrollo Web para entender y construir cada vez más desde el código.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#proyectos"><span data-es="Explorar proyectos" data-en="Explore projects">Explorar proyectos</span><span aria-hidden="true">↘</span></a>
+          <a class="button" href="#contacto"><span data-es="Hablemos" data-en="Get in touch">Hablemos</span><span aria-hidden="true">↗</span></a>
+          <a class="button" href="https://github.com/cecy-1984" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="hero-tags" aria-label="Focus areas">
+          <span class="pill"><b>01</b> WordPress</span>
+          <span class="pill"><b>02</b> HTML / CSS</span>
+          <span class="pill"><b>03</b> JavaScript</span>
+          <span class="pill"><b>04</b> React</span>
+        </div>
       </div>
-      <div class="step">
-        <span class="when mono" data-es="Durante la pandemia" data-en="During the pandemic">Durante la pandemia</span>
-        <h3 data-es="WordPress: proyectos reales" data-en="WordPress: real-world projects">WordPress: proyectos reales</h3>
-        <p data-es="Empecé a crear y vender sitios web con WordPress. Algunos consiguieron mucho tráfico y fueron monetizados. Ahí descubrí que crear sitios era lo mío." data-en="I started building and selling WordPress websites. Some attracted significant traffic and were monetized. That was when I discovered that building websites was what I wanted to do.">Empecé a crear y vender sitios web con WordPress. Algunos consiguieron mucho tráfico y fueron monetizados. Ahí descubrí que crear sitios era lo mío.</p>
-      </div>
-      <div class="step now">
-        <span class="when mono" data-es="2026 — hoy" data-en="2026 — present">2026 — hoy</span>
-        <h3 data-es="Del diseño al código" data-en="From design to code">Del diseño al código</h3>
-        <p data-es="Quise ir más allá de WordPress y entender cómo se construye la web. Mi interés por HTML y CSS me llevó a empezar Desarrollo Web en el Instituto Superior Santa Rosa de Calamuchita." data-en="I wanted to go beyond WordPress and understand how the web is built. My interest in HTML and CSS led me to start studying Web Development at Instituto Superior Santa Rosa de Calamuchita.">Quise ir más allá de WordPress y entender cómo se construye la web. Mi interés por HTML y CSS me llevó a empezar Desarrollo Web en el Instituto Superior Santa Rosa de Calamuchita.</p>
-      </div>
-    </div>
-  </div>
-</section>
 
-<section id="skills">
-  <div class="wrap">
-    <h2 class="section-title" data-es="En qué estoy metiendo mano" data-en="What I’m working on">En qué estoy metiendo mano</h2>
-    <div class="skills">
-      <div class="skill"><div class="name">HTML</div><div class="status" data-es="aprendiendo" data-en="learning">aprendiendo</div></div>
-      <div class="skill"><div class="name">CSS</div><div class="status" data-es="aprendiendo" data-en="learning">aprendiendo</div></div>
-      <div class="skill"><div class="name">JavaScript</div><div class="status" data-es="primeros pasos" data-en="getting started">primeros pasos</div></div>
-      <div class="skill"><div class="name">WordPress</div><div class="status" data-es="experiencia práctica" data-en="hands-on experience">experiencia práctica</div></div>
-      <div class="skill"><div class="name">Git &amp; GitHub</div><div class="status" data-es="aprendiendo" data-en="learning">aprendiendo</div></div>
-      <div class="skill"><div class="name">Inglés</div><div class="status" data-es="nivel avanzado" data-en="advanced">nivel avanzado</div></div>
-    </div>
-  </div>
-</section>
-
-<section id="proyectos">
-  <div class="wrap">
-    <h2 class="section-title" data-es="Proyectos y prácticas" data-en="Projects & coursework">Ejercicios del instituto</h2>
-    <div class="projects">
-      <div class="project">
-        <div>
-          <h3 data-es="Página de práctica en HTML/CSS" data-en="HTML/CSS practice page">Página de práctica en HTML/CSS</h3>
-          <p data-es="Primer ejercicio de maquetado: estructura semántica y estilos base." data-en="First layout exercise: semantic HTML structure and foundational styling.">Primer ejercicio de maquetado: estructura semántica y estilos base.</p>
+      <div class="code-window reveal" aria-label="Interactive code preview">
+        <div class="code-inner">
+          <div class="window-bar">
+            <div class="window-dots" aria-hidden="true"><i></i><i></i><i></i></div>
+            <span class="window-filename">portfolio / src</span>
+            <span class="live-label">● <span data-es="EN VIVO" data-en="LIVE">EN VIVO</span></span>
+          </div>
+          <div class="code-tabs" role="tablist" aria-label="Code examples">
+            <button class="code-tab" id="tab-profile" type="button" role="tab" aria-selected="true" aria-controls="code-panel" data-file="profile">profile.js</button>
+            <button class="code-tab" id="tab-roadmap" type="button" role="tab" aria-selected="false" aria-controls="code-panel" data-file="roadmap">roadmap.json</button>
+          </div>
+          <div class="code-body" id="code-panel" role="tabpanel" aria-labelledby="tab-profile">
+            <span class="code-line"><span class="ln">01</span><span class="kw">const</span> <span class="var">cecilia</span> = {</span>
+            <span class="code-line"><span class="ln">02</span>  background: <span class="str">"WordPress"</span>,</span>
+            <span class="code-line"><span class="ln">03</span>  learning: [<span class="str">"JavaScript"</span>, <span class="str">"React"</span>],</span>
+            <span class="code-line"><span class="ln">04</span>  mindset: <span class="str">"keepBuilding()"</span></span>
+            <span class="code-line"><span class="ln">05</span>};</span>
+            <span class="code-line"><span class="ln">06</span></span>
+            <span class="code-line"><span class="ln">07</span><span class="kw">while</span> (curiosity) {</span>
+            <span class="code-line"><span class="ln">08</span>  <span class="fn">learn</span>(); <span class="fn">build</span>(); <span class="fn">repeat</span>();</span>
+            <span class="code-line"><span class="ln">09</span>}</span>
+          </div>
+          <div class="code-foot"><span>UTF-8 · JavaScript</span><span id="code-status">✓ <span data-es="archivo cargado" data-en="file loaded">archivo cargado</span></span></div>
         </div>
-        <span class="tag">HTML · CSS</span>
-      </div>
-      <div class="project">
-        <div>
-          <h3 data-es="Formulario de contacto" data-en="Contact form">Formulario de contacto</h3>
-          <p data-es="Práctica de formularios, validación básica y estilos de inputs." data-en="Form practice covering basic validation and input styling.">Práctica de formularios, validación básica y estilos de inputs.</p>
-        </div>
-        <span class="tag">HTML · CSS</span>
-      </div>
-      <div class="project">
-        <div>
-          <h3 data-es="Tarjeta de perfil interactiva" data-en="Interactive profile card">Tarjeta de perfil interactiva</h3>
-          <p data-es="Componente con estados hover y algo de JavaScript para interacción." data-en="A component using hover states and a little JavaScript for interaction.">Componente con estados hover y algo de JavaScript para interacción.</p>
-        </div>
-        <span class="tag">HTML · CSS · JS</span>
-      </div>
-      <div class="project">
-        <div>
-          <h3 data-es="Menú Digital de Restó" data-en="Digital Restaurant Menu">Menú Digital de Restó</h3>
-          <p data-es="Aplicación desarrollada con React y Vite. Incluye tarjetas de platos, precios formateados, disponibilidad, etiquetas y resumen del menú." data-en="A React and Vite application featuring dish cards, formatted prices, availability states, tags and a menu summary.">Aplicación desarrollada con React y Vite. Incluye tarjetas de platos, precios formateados, disponibilidad, etiquetas y resumen del menú.</p>
-          <p class="project-links">
-            <a href="https://cecy-1984.github.io/menu-digital-resto/" target="_blank" rel="noopener noreferrer" data-es="Ver demo ↗" data-en="Live demo ↗">Ver demo ↗</a>
-            &nbsp;·&nbsp;
-            <a href="https://github.com/Cecy-1984/menu-digital-resto" target="_blank" rel="noopener noreferrer" data-es="Ver código ↗" data-en="View code ↗">Ver código ↗</a>
-          </p>
-        </div>
-        <span class="tag">React · Vite · CSS</span>
-      </div>
-      <div class="project">
-        <div>
-          <h3 data-es="CineApp — Catálogo de películas y tráilers" data-en="CineApp — Movie Catalog &amp; Trailers">CineApp — Catálogo de películas y tráilers</h3>
-          <p data-es="Aplicación desarrollada con React y Vite. Permite filtrar películas por categoría y consultar sinopsis y tráilers de YouTube en un modal." data-en="A React and Vite app for filtering movies by category and viewing synopses and YouTube trailers in a modal.">Aplicación desarrollada con React y Vite. Permite filtrar películas por categoría y consultar sinopsis y tráilers de YouTube en un modal.</p>
-          <p class="project-links">
-            <a href="https://github.com/Cecy-1984/cine-app" target="_blank" rel="noopener noreferrer" data-es="Ver código ↗" data-en="View code ↗">Ver código ↗</a>
-            &nbsp;·&nbsp;
-            <span class="project-status" data-es="Demo próximamente" data-en="Live demo coming soon">Demo próximamente</span>
-          </p>
-        </div>
-        <span class="tag">React · Vite · CSS</span>
       </div>
     </div>
-    <p class="note" data-es="Estos son algunos de los proyectos y ejercicios que voy desarrollando durante mi formación." data-en="These are some of the projects and exercises I am building during my studies.">Estos son algunos de los proyectos y ejercicios que voy desarrollando durante mi formación.</p>
-  </div>
-</section>
+  </header>
 
-<footer id="contacto">
-  <div class="wrap">
-    <h2 class="section-title" data-es="Hablemos" data-en="Let’s connect">Hablemos</h2>
-    <p data-es="Estoy profundizando mis conocimientos de desarrollo web y sumando nuevas herramientas a la experiencia que ya construí creando sitios. Me interesa seguir aprendiendo, resolver problemas y desarrollar proyectos útiles. Podés contactarme por estos medios." data-en="I am deepening my web development skills and adding new tools to the experience I have already gained building websites. I am interested in continuing to learn, solving problems and creating useful projects. You can reach me through the links below.">Estoy profundizando mis conocimientos de desarrollo web y sumando nuevas herramientas a la experiencia que ya construí creando sitios. Me interesa seguir aprendiendo, resolver problemas y desarrollar proyectos útiles. Podés contactarme por estos medios.</p>
-    <div class="hero-links">
-      <a class="btn solid" href="mailto:cbrodriguez2019@gmail.com">cbrodriguez2019@gmail.com</a>
-      <a class="btn" href="https://github.com/cecy-1984" target="_blank" rel="noopener">github.com/cecy-1984</a>
+  <main>
+    <section id="historia">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><p class="section-kicker" data-es="01 / MI RECORRIDO" data-en="01 / MY JOURNEY">01 / MI RECORRIDO</p><h2 data-es="Cada etapa me trajo hasta acá." data-en="Every step brought me here.">Cada etapa me trajo hasta acá.</h2></div>
+          <p class="section-aside" data-es="No empecé de cero: fui sumando herramientas." data-en="I didn’t start from zero; I kept adding tools.">No empecé de cero: fui sumando herramientas.</p>
+        </div>
+        <div class="journey-grid">
+          <article class="journey-card reveal">
+            <span class="journey-num">01 — <span data-es="EL COMIENZO" data-en="THE BEGINNING">EL COMIENZO</span></span>
+            <h3 data-es="Inglés y experiencia bilingüe" data-en="English & bilingual experience">Inglés y experiencia bilingüe</h3>
+            <p data-es="Estudié profesorado de inglés y trabajé en distintos call centers bilingües. Esa etapa fortaleció mi comunicación y me ayudó a descubrir hacia dónde quería orientar mi carrera." data-en="I studied English teacher training and worked at several bilingual call centers. That experience strengthened my communication skills and helped me discover where I wanted to take my career.">Estudié profesorado de inglés y trabajé en distintos call centers bilingües. Esa etapa fortaleció mi comunicación y me ayudó a descubrir hacia dónde quería orientar mi carrera.</p>
+          </article>
+          <article class="journey-card reveal">
+            <span class="journey-num">02 — <span data-es="DURANTE LA PANDEMIA" data-en="DURING THE PANDEMIC">DURANTE LA PANDEMIA</span></span>
+            <h3 data-es="WordPress: proyectos reales" data-en="WordPress: real-world projects">WordPress: proyectos reales</h3>
+            <p data-es="Empecé a crear y vender sitios web con WordPress. Algunos consiguieron mucho tráfico y fueron monetizados. Ahí descubrí que crear sitios era lo mío." data-en="I started building and selling WordPress websites. Some attracted significant traffic and were monetized. That was when I discovered that building websites was what I wanted to do.">Empecé a crear y vender sitios web con WordPress. Algunos consiguieron mucho tráfico y fueron monetizados. Ahí descubrí que crear sitios era lo mío.</p>
+          </article>
+          <article class="journey-card reveal">
+            <span class="journey-num">03 — <span data-es="2026 / HOY" data-en="2026 / NOW">2026 / HOY</span></span>
+            <h3 data-es="Del diseño al código" data-en="From design to code">Del diseño al código</h3>
+            <p data-es="Quise ir más allá de WordPress y entender cómo se construye la web. Mi interés por HTML y CSS me llevó a estudiar Desarrollo Web en el Instituto Superior Santa Rosa de Calamuchita." data-en="I wanted to go beyond WordPress and understand how the web is built. My interest in HTML and CSS led me to study Web Development at Instituto Superior Santa Rosa de Calamuchita.">Quise ir más allá de WordPress y entender cómo se construye la web. Mi interés por HTML y CSS me llevó a estudiar Desarrollo Web en el Instituto Superior Santa Rosa de Calamuchita.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><p class="section-kicker" data-es="02 / HERRAMIENTAS" data-en="02 / TOOLKIT">02 / HERRAMIENTAS</p><h2 data-es="Lo que uso. Lo que estoy aprendiendo." data-en="What I use. What I’m learning.">Lo que uso. Lo que estoy aprendiendo.</h2></div>
+          <p class="section-aside" data-es="Aprender también es parte del stack." data-en="Learning is part of the stack, too.">Aprender también es parte del stack.</p>
+        </div>
+        <div class="skills-grid">
+          <article class="skill-card reveal"><span class="skill-icon">&lt;/&gt;</span><h3>HTML</h3><p data-es="APRENDIENDO" data-en="LEARNING">APRENDIENDO</p><div class="skill-desc" data-es="Estructura y semántica web" data-en="Web structure and semantics">Estructura y semántica web</div></article>
+          <article class="skill-card reveal"><span class="skill-icon">#</span><h3>CSS</h3><p data-es="APRENDIENDO" data-en="LEARNING">APRENDIENDO</p><div class="skill-desc" data-es="Diseño, layout y responsive" data-en="Styling, layout and responsive design">Diseño, layout y responsive</div></article>
+          <article class="skill-card reveal"><span class="skill-icon">JS</span><h3>JavaScript</h3><p data-es="PRIMEROS PASOS" data-en="GETTING STARTED">PRIMEROS PASOS</p><div class="skill-desc" data-es="Lógica e interactividad" data-en="Logic and interactivity">Lógica e interactividad</div></article>
+          <article class="skill-card reveal"><span class="skill-icon">⚛</span><h3>React</h3><p data-es="ESTUDIANDO" data-en="CURRENTLY LEARNING">ESTUDIANDO</p><div class="skill-desc" data-es="Componentes, props y estado" data-en="Components, props and state">Componentes, props y estado</div></article>
+          <article class="skill-card reveal"><span class="skill-icon">W</span><h3>WordPress</h3><p data-es="EXPERIENCIA PRÁCTICA" data-en="HANDS-ON EXPERIENCE">EXPERIENCIA PRÁCTICA</p><div class="skill-desc" data-es="Sitios creados y vendidos" data-en="Websites built and sold">Sitios creados y vendidos</div></article>
+          <article class="skill-card reveal"><span class="skill-icon">&gt;_</span><h3>Git &amp; GitHub</h3><p data-es="APRENDIENDO" data-en="LEARNING">APRENDIENDO</p><div class="skill-desc" data-es="Versionado y publicación" data-en="Version control and deployment">Versionado y publicación</div></article>
+          <article class="skill-card reveal"><span class="skill-icon">EN</span><h3 data-es="Inglés" data-en="English">Inglés</h3><p data-es="NIVEL AVANZADO" data-en="ADVANCED">NIVEL AVANZADO</p><div class="skill-desc" data-es="Comunicación bilingüe" data-en="Bilingual communication">Comunicación bilingüe</div></article>
+          <article class="skill-card reveal"><span class="skill-icon">↗</span><h3 data-es="Mentalidad" data-en="Mindset">Mentalidad</h3><p data-es="SIEMPRE EN PROCESO" data-en="ALWAYS IN PROGRESS">SIEMPRE EN PROCESO</p><div class="skill-desc" data-es="Curiosidad, práctica y mejora" data-en="Curiosity, practice and iteration">Curiosidad, práctica y mejora</div></article>
+        </div>
+        <p class="skills-note reveal" data-es="* Los estados reflejan mi etapa actual de aprendizaje." data-en="* Status labels reflect my current learning stage.">* Los estados reflejan mi etapa actual de aprendizaje.</p>
+      </div>
+    </section>
+
+    <section id="proyectos">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><p class="section-kicker" data-es="03 / COSAS QUE CONSTRUÍ" data-en="03 / THINGS I’VE BUILT">03 / COSAS QUE CONSTRUÍ</p><h2 data-es="Proyectos seleccionados." data-en="Selected projects.">Proyectos seleccionados.</h2></div>
+          <p class="section-aside" data-es="Práctica, curiosidad y código que va creciendo." data-en="Practice, curiosity and code that keeps growing.">Práctica, curiosidad y código que va creciendo.</p>
+        </div>
+        <div class="projects-grid">
+          <article class="project-card reveal">
+            <div class="project-top"><span class="project-symbol">{ }</span><span class="project-number">PROJECT / 001</span></div>
+            <h3 data-es="Menú Digital de Restó" data-en="Digital Restaurant Menu">Menú Digital de Restó</h3>
+            <p data-es="Una aplicación para explorar un menú digital con tarjetas de platos, precios formateados, disponibilidad, etiquetas y resumen del menú." data-en="An app for exploring a digital menu with dish cards, formatted prices, availability states, tags and a menu summary.">Una aplicación para explorar un menú digital con tarjetas de platos, precios formateados, disponibilidad, etiquetas y resumen del menú.</p>
+            <div class="project-tech"><span>React</span><span>Vite</span><span>CSS</span></div>
+            <div class="project-links"><a href="https://cecy-1984.github.io/menu-digital-resto/" target="_blank" rel="noopener noreferrer" data-es="Ver demo ↗" data-en="Live demo ↗">Ver demo ↗</a><a href="https://github.com/Cecy-1984/menu-digital-resto" target="_blank" rel="noopener noreferrer" data-es="Ver código ↗" data-en="View code ↗">Ver código ↗</a></div>
+          </article>
+          <article class="project-card reveal">
+            <div class="project-top"><span class="project-symbol">▶</span><span class="project-number">PROJECT / 002</span></div>
+            <h3>CineApp — <span data-es="Catálogo de películas y tráilers" data-en="Movie catalog & trailers">Catálogo de películas y tráilers</span></h3>
+            <p data-es="Un catálogo interactivo para filtrar películas por categoría y consultar sinopsis y tráilers de YouTube en una ventana modal." data-en="An interactive catalog for filtering movies by category and viewing synopses and YouTube trailers in a modal window.">Un catálogo interactivo para filtrar películas por categoría y consultar sinopsis y tráilers de YouTube en una ventana modal.</p>
+            <div class="project-tech"><span>React</span><span>Vite</span><span>JSON</span><span>CSS</span></div>
+            <div class="project-links"><a href="https://github.com/Cecy-1984/cine-app" target="_blank" rel="noopener noreferrer" data-es="Ver código ↗" data-en="View code ↗">Ver código ↗</a><span class="coming-soon" data-es="Demo próximamente" data-en="Live demo coming soon">Demo próximamente</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto">
+      <div class="wrap">
+        <div class="contact-panel reveal">
+          <div>
+            <p class="section-kicker" data-es="04 / SIGUIENTE PASO" data-en="04 / WHAT’S NEXT">04 / SIGUIENTE PASO</p>
+            <h2 data-es="Tengo experiencia creando sitios. Ahora quiero llegar más lejos con código." data-en="I have experience building websites. Now I want to go further with code.">Tengo experiencia creando sitios. Ahora quiero llegar más lejos con código.</h2>
+            <p data-es="Estoy profundizando mis conocimientos de desarrollo web y sumando herramientas a la experiencia que ya construí con WordPress. Me interesa seguir aprendiendo, resolver problemas y desarrollar proyectos útiles." data-en="I’m deepening my web development skills and adding new tools to the experience I’ve gained with WordPress. I’m interested in learning, solving problems and building useful projects.">Estoy profundizando mis conocimientos de desarrollo web y sumando herramientas a la experiencia que ya construí con WordPress. Me interesa seguir aprendiendo, resolver problemas y desarrollar proyectos útiles.</p>
+          </div>
+          <div class="contact-actions">
+            <a class="button primary" href="mailto:cbrodriguez2019@gmail.com" data-es="Escribime por email ↗" data-en="Email me ↗">Escribime por email ↗</a>
+            <button class="button" id="copy-email" type="button" data-es="Copiar email" data-en="Copy email">Copiar email</button>
+            <a class="button" href="https://github.com/cecy-1984" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <span>© <span id="year">2026</span> Cecilia Rodríguez</span>
+      <span data-es="Hecho con curiosidad y muchas ganas de aprender." data-en="Made with curiosity and a lot of learning-in-progress.">Hecho con curiosidad y muchas ganas de aprender.</span>
+      <a href="#inicio" data-es="Volver arriba ↑" data-en="Back to top ↑">Volver arriba ↑</a>
     </div>
-    <span class="fine" data-es="Instituto Superior Santa Rosa de Calamuchita · Desarrollo Web · 2026" data-en="Instituto Superior Santa Rosa de Calamuchita · Web Development · 2026">Instituto Superior Santa Rosa de Calamuchita · Desarrollo Web · 2026</span>
-  </div>
-</footer>
+  </footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+  <script>
+    (() => {
+      document.documentElement.classList.add('js');
 
-<script>
-  (() => {
-    const toggle = document.getElementById('lang-toggle');
-    const description = document.querySelector('meta[name="description"]');
+      const languageToggle = document.getElementById('lang-toggle');
+      const codePanel = document.getElementById('code-panel');
+      const codeTabs = [...document.querySelectorAll('.code-tab')];
+      const copyEmailButton = document.getElementById('copy-email');
+      const toast = document.getElementById('toast');
+      const metaDescription = document.querySelector('meta[name="description"]');
+      const email = 'cbrodriguez2019@gmail.com';
+      let toastTimeout;
+      let currentFile = 'profile';
 
-    function setLanguage(language) {
-      document.documentElement.lang = language;
-      document.querySelectorAll('[data-es][data-en]').forEach((element) => {
-        element.textContent = element.dataset[language];
+      const snippets = {
+        profile: [
+          '<span class="code-line"><span class="ln">01</span><span class="kw">const</span> <span class="var">cecilia</span> = {</span>',
+          '<span class="code-line"><span class="ln">02</span>  background: <span class="str">"WordPress"</span>,</span>',
+          '<span class="code-line"><span class="ln">03</span>  learning: [<span class="str">"JavaScript"</span>, <span class="str">"React"</span>],</span>',
+          '<span class="code-line"><span class="ln">04</span>  mindset: <span class="str">"keepBuilding()"</span></span>',
+          '<span class="code-line"><span class="ln">05</span>};</span>',
+          '<span class="code-line"><span class="ln">06</span></span>',
+          '<span class="code-line"><span class="ln">07</span><span class="kw">while</span> (curiosity) {</span>',
+          '<span class="code-line"><span class="ln">08</span>  <span class="fn">learn</span>(); <span class="fn">build</span>(); <span class="fn">repeat</span>();</span>',
+          '<span class="code-line"><span class="ln">09</span>}</span>'
+        ],
+        roadmap: [
+          '<span class="code-line"><span class="ln">01</span>{</span>',
+          '<span class="code-line"><span class="ln">02</span>  <span class="var">"background"</span>: <span class="str">"WordPress"</span>,</span>',
+          '<span class="code-line"><span class="ln">03</span>  <span class="var">"now"</span>: [<span class="str">"HTML"</span>, <span class="str">"CSS"</span>],</span>',
+          '<span class="code-line"><span class="ln">04</span>  <span class="var">"learning"</span>: [<span class="str">"JavaScript"</span>, <span class="str">"React"</span>],</span>',
+          '<span class="code-line"><span class="ln">05</span>  <span class="var">"nextStep"</span>: <span class="str">"keep building"</span></span>',
+          '<span class="code-line"><span class="ln">06</span>}</span>',
+          '<span class="code-line"><span class="ln">07</span></span>',
+          '<span class="code-line"><span class="ln">08</span><span class="kw">//</span> <span class="fn">practice</span> → <span class="fn">learn</span> → <span class="fn">repeat</span></span>'
+        ]
+      };
+
+      function showToast(message) {
+        toast.textContent = message;
+        toast.classList.add('show');
+        window.clearTimeout(toastTimeout);
+        toastTimeout = window.setTimeout(() => toast.classList.remove('show'), 2600);
+      }
+
+      function renderCode(file) {
+        currentFile = file;
+        codePanel.innerHTML = snippets[file].join('');
+        codePanel.setAttribute('aria-labelledby', file === 'profile' ? 'tab-profile' : 'tab-roadmap');
+        codeTabs.forEach((tab) => {
+          const selected = tab.dataset.file === file;
+          tab.setAttribute('aria-selected', String(selected));
+          tab.tabIndex = selected ? 0 : -1;
+        });
+        const statusLabel = document.getElementById('code-status');
+        statusLabel.innerHTML = '✓ <span data-es="archivo cargado" data-en="file loaded">archivo cargado</span>';
+        statusLabel.querySelector('[data-es]').textContent = document.documentElement.lang === 'es' ? statusLabel.querySelector('[data-es]').dataset.es : statusLabel.querySelector('[data-en]').dataset.en;
+      }
+
+      function setLanguage(language) {
+        document.documentElement.lang = language;
+        document.querySelectorAll('[data-es][data-en]').forEach((element) => {
+          element.textContent = element.dataset[language];
+        });
+        const isSpanish = language === 'es';
+        languageToggle.innerHTML = `${isSpanish ? 'EN' : 'ES'} <span aria-hidden="true">↗</span>`;
+        languageToggle.setAttribute('aria-label', isSpanish ? 'Switch to English' : 'Cambiar a español');
+        document.title = isSpanish
+          ? 'Cecilia Rodríguez — De crear sitios a escribir código'
+          : 'Cecilia Rodríguez — From Building Websites to Writing Code';
+        if (metaDescription) {
+          metaDescription.content = isSpanish
+            ? 'Portfolio de Cecilia Rodríguez: experiencia creando y vendiendo sitios WordPress, y formación actual en desarrollo web con HTML, CSS, JavaScript y React.'
+            : 'Cecilia Rodríguez’s portfolio: experience building and selling WordPress websites, and ongoing web development studies with HTML, CSS, JavaScript and React.';
+        }
+        // Restore the interactive code preview after the language update.
+        renderCode(currentFile);
+      }
+
+      languageToggle.addEventListener('click', () => {
+        setLanguage(document.documentElement.lang === 'es' ? 'en' : 'es');
       });
 
-      const isSpanish = language === 'es';
-      toggle.textContent = isSpanish ? 'EN' : 'ES';
-      toggle.setAttribute('aria-label', isSpanish ? 'Switch to English' : 'Cambiar a español');
-      document.title = isSpanish
-        ? 'Cecilia Rodríguez — De crear sitios a escribir código'
-        : 'Cecilia Rodríguez — From Building Websites to Writing Code';
+      codeTabs.forEach((tab) => {
+        tab.addEventListener('click', () => renderCode(tab.dataset.file));
+        tab.addEventListener('keydown', (event) => {
+          if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
+            event.preventDefault();
+            const index = codeTabs.indexOf(tab);
+            const nextIndex = event.key === 'ArrowRight' ? (index + 1) % codeTabs.length : (index - 1 + codeTabs.length) % codeTabs.length;
+            codeTabs[nextIndex].focus();
+            renderCode(codeTabs[nextIndex].dataset.file);
+          }
+        });
+      });
 
-      if (description) {
-        description.content = isSpanish
-          ? 'Portfolio de Cecilia Rodríguez: experiencia creando sitios con WordPress y formación en desarrollo web con HTML, CSS, JavaScript y React.'
-          : 'Cecilia Rodríguez’s portfolio: WordPress website-building experience and ongoing web development studies with HTML, CSS, JavaScript and React.';
+      copyEmailButton.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(email);
+          showToast(document.documentElement.lang === 'es' ? 'Email copiado al portapapeles ✓' : 'Email copied to clipboard ✓');
+        } catch (error) {
+          window.location.href = `mailto:${email}`;
+          showToast(document.documentElement.lang === 'es' ? 'Abrí tu aplicación de correo' : 'Opening your email app');
+        }
+      });
+
+      const revealItems = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12 });
+        revealItems.forEach((item) => observer.observe(item));
+      } else {
+        revealItems.forEach((item) => item.classList.add('is-visible'));
       }
-    }
 
-    toggle.addEventListener('click', () => {
-      setLanguage(document.documentElement.lang === 'es' ? 'en' : 'es');
-    });
-  })();
-</script>
-
+      document.getElementById('year').textContent = new Date().getFullYear();
+    })();
+  </script>
 </body>
 </html>
