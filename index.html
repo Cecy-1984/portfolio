@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Cecilia Rodríguez — Desarrollo Web</title>
+<title>Cecilia Rodríguez — De WordPress al desarrollo web</title>
+<meta name="description" content="Portfolio de Cecilia Rodríguez: experiencia creando sitios con WordPress y formación en desarrollo web con HTML, CSS, JavaScript y React.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -38,6 +39,28 @@
     justify-content: center;
     position: relative;
     border-bottom: 1px solid var(--line);
+  }
+  .lang-toggle {
+    position: absolute;
+    top: 24px;
+    right: max(20px, calc((100vw - 780px) / 2 + 28px));
+    z-index: 2;
+    padding: 9px 13px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: var(--bg-alt);
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  .lang-toggle:hover { border-color: var(--accent); }
+  .lang-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .project-status {
+    color: var(--ink-dim);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
   }
   .prompt {
     color: var(--accent);
@@ -171,12 +194,13 @@
 <body>
 
 <header class="hero">
+  <button class="lang-toggle" id="lang-toggle" type="button" aria-label="Switch to English">EN</button>
   <div class="wrap">
     <span class="prompt mono">cecy-1984 $ whoami</span>
-    <h1 class="title">Cecilia Rodríguez,<br>construyendo su <em>primera</em> web.</h1>
-    <p class="lede">Estudiante de Desarrollo Web en el Instituto Superior Santa Rosa de Calamuchita. Primer año, y en camino desde el profesorado de inglés hasta el código.</p>
+    <h1 class="title">Cecilia Rodríguez,<br><span data-es="de WordPress al " data-en="from WordPress to ">de WordPress al </span><em data-es="desarrollo web" data-en="web development">desarrollo web</em><span data-es="." data-en=".">.</span></h1>
+    <p class="lede" data-es="Durante la pandemia empecé a crear y vender sitios en WordPress; algunos llegaron a generar mucho tráfico y fueron monetizados. Esa experiencia me llevó a explorar HTML y CSS y, finalmente, a estudiar Desarrollo Web." data-en="During the pandemic, I started building and selling WordPress websites; some attracted significant traffic and were monetized. That experience led me to explore HTML and CSS and eventually pursue Web Development studies.">Durante la pandemia empecé a crear y vender sitios en WordPress; algunos llegaron a generar mucho tráfico y fueron monetizados. Esa experiencia me llevó a explorar HTML y CSS y, finalmente, a estudiar Desarrollo Web.</p>
     <div class="hero-links">
-      <a class="btn solid" href="#contacto">Escribime</a>
+      <a class="btn solid" href="#contacto" data-es="Escribime" data-en="Get in touch">Escribime</a>
       <a class="btn" href="https://github.com/cecy-1984" target="_blank" rel="noopener">GitHub</a>
     </div>
   </div>
@@ -184,22 +208,22 @@
 
 <section id="historia">
   <div class="wrap">
-    <h2 class="section-title">Cómo llegué acá</h2>
+    <h2 class="section-title" data-es="El camino hasta el código" data-en="The path to code">El camino hasta el código</h2>
     <div class="timeline">
       <div class="step">
-        <span class="when mono">Antes</span>
-        <h3>Profesorado de inglés</h3>
-        <p>Estudié para ser profesora de inglés, pero terminé descubriendo que no era mi camino.</p>
+        <span class="when mono" data-es="El comienzo" data-en="The beginning">El comienzo</span>
+        <h3 data-es="Inglés y experiencia bilingüe" data-en="English and bilingual work">Inglés y experiencia bilingüe</h3>
+        <p data-es="Estudié profesorado de inglés y trabajé en distintos call centers bilingües. Con el tiempo entendí que quería orientar mi camino hacia algo diferente." data-en="I studied English teacher training and worked at several bilingual call centers. Over time, I realized I wanted to take my career in a different direction.">Estudié profesorado de inglés y trabajé en distintos call centers bilingües. Con el tiempo entendí que quería orientar mi camino hacia algo diferente.</p>
       </div>
       <div class="step">
-        <span class="when mono">El quiebre</span>
-        <h3>WordPress y un foro</h3>
-        <p>Empecé a armar páginas en WordPress y a venderlas en un foro. Ahí nació el interés real por programar.</p>
+        <span class="when mono" data-es="Durante la pandemia" data-en="During the pandemic">Durante la pandemia</span>
+        <h3 data-es="WordPress: proyectos reales" data-en="WordPress: real-world projects">WordPress: proyectos reales</h3>
+        <p data-es="Empecé a crear y vender sitios web con WordPress. Algunos consiguieron mucho tráfico y fueron monetizados. Ahí descubrí que crear sitios era lo mío." data-en="I started building and selling WordPress websites. Some attracted significant traffic and were monetized. That was when I discovered that building websites was what I wanted to do.">Empecé a crear y vender sitios web con WordPress. Algunos consiguieron mucho tráfico y fueron monetizados. Ahí descubrí que crear sitios era lo mío.</p>
       </div>
       <div class="step now">
-        <span class="when mono">2026 — hoy</span>
-        <h3>Desarrollo Web, primer año</h3>
-        <p>Aproveché la oportunidad y arranqué la carrera en el Instituto Superior Santa Rosa de Calamuchita. Esta página es parte de lo que voy aprendiendo.</p>
+        <span class="when mono" data-es="2026 — hoy" data-en="2026 — present">2026 — hoy</span>
+        <h3 data-es="Del diseño al código" data-en="From design to code">Del diseño al código</h3>
+        <p data-es="Quise ir más allá de WordPress y entender cómo se construye la web. Mi interés por HTML y CSS me llevó a empezar Desarrollo Web en el Instituto Superior Santa Rosa de Calamuchita." data-en="I wanted to go beyond WordPress and understand how the web is built. My interest in HTML and CSS led me to start studying Web Development at Instituto Superior Santa Rosa de Calamuchita.">Quise ir más allá de WordPress y entender cómo se construye la web. Mi interés por HTML y CSS me llevó a empezar Desarrollo Web en el Instituto Superior Santa Rosa de Calamuchita.</p>
       </div>
     </div>
   </div>
@@ -207,71 +231,115 @@
 
 <section id="skills">
   <div class="wrap">
-    <h2 class="section-title">En qué estoy metiendo mano</h2>
+    <h2 class="section-title" data-es="En qué estoy metiendo mano" data-en="What I’m working on">En qué estoy metiendo mano</h2>
     <div class="skills">
-      <div class="skill"><div class="name">HTML</div><div class="status">aprendiendo</div></div>
-      <div class="skill"><div class="name">CSS</div><div class="status">aprendiendo</div></div>
-      <div class="skill"><div class="name">JavaScript</div><div class="status">primeros pasos</div></div>
-      <div class="skill"><div class="name">WordPress</div><div class="status">ya lo uso</div></div>
-      <div class="skill"><div class="name">Git &amp; GitHub</div><div class="status">aprendiendo</div></div>
-      <div class="skill"><div class="name">Inglés</div><div class="status">nivel avanzado</div></div>
+      <div class="skill"><div class="name">HTML</div><div class="status" data-es="aprendiendo" data-en="learning">aprendiendo</div></div>
+      <div class="skill"><div class="name">CSS</div><div class="status" data-es="aprendiendo" data-en="learning">aprendiendo</div></div>
+      <div class="skill"><div class="name">JavaScript</div><div class="status" data-es="primeros pasos" data-en="getting started">primeros pasos</div></div>
+      <div class="skill"><div class="name">WordPress</div><div class="status" data-es="experiencia práctica" data-en="hands-on experience">experiencia práctica</div></div>
+      <div class="skill"><div class="name">Git &amp; GitHub</div><div class="status" data-es="aprendiendo" data-en="learning">aprendiendo</div></div>
+      <div class="skill"><div class="name">Inglés</div><div class="status" data-es="nivel avanzado" data-en="advanced">nivel avanzado</div></div>
     </div>
   </div>
 </section>
 
 <section id="proyectos">
   <div class="wrap">
-    <h2 class="section-title">Ejercicios del instituto</h2>
+    <h2 class="section-title" data-es="Proyectos y prácticas" data-en="Projects & coursework">Ejercicios del instituto</h2>
     <div class="projects">
       <div class="project">
         <div>
-          <h3>Página de práctica en HTML/CSS</h3>
-          <p>Primer ejercicio de maquetado: estructura semántica y estilos base.</p>
+          <h3 data-es="Página de práctica en HTML/CSS" data-en="HTML/CSS practice page">Página de práctica en HTML/CSS</h3>
+          <p data-es="Primer ejercicio de maquetado: estructura semántica y estilos base." data-en="First layout exercise: semantic HTML structure and foundational styling.">Primer ejercicio de maquetado: estructura semántica y estilos base.</p>
         </div>
         <span class="tag">HTML · CSS</span>
       </div>
       <div class="project">
         <div>
-          <h3>Formulario de contacto</h3>
-          <p>Práctica de formularios, validación básica y estilos de inputs.</p>
+          <h3 data-es="Formulario de contacto" data-en="Contact form">Formulario de contacto</h3>
+          <p data-es="Práctica de formularios, validación básica y estilos de inputs." data-en="Form practice covering basic validation and input styling.">Práctica de formularios, validación básica y estilos de inputs.</p>
         </div>
         <span class="tag">HTML · CSS</span>
       </div>
       <div class="project">
         <div>
-          <h3>Tarjeta de perfil interactiva</h3>
-          <p>Componente con estados hover y algo de JavaScript para interacción.</p>
+          <h3 data-es="Tarjeta de perfil interactiva" data-en="Interactive profile card">Tarjeta de perfil interactiva</h3>
+          <p data-es="Componente con estados hover y algo de JavaScript para interacción." data-en="A component using hover states and a little JavaScript for interaction.">Componente con estados hover y algo de JavaScript para interacción.</p>
         </div>
         <span class="tag">HTML · CSS · JS</span>
       </div>
       <div class="project">
         <div>
-          <h3>Menú Digital de Restó</h3>
-          <p>Aplicación desarrollada con React y Vite. Incluye tarjetas de platos, precios formateados, disponibilidad, etiquetas y resumen del menú.</p>
+          <h3 data-es="Menú Digital de Restó" data-en="Digital Restaurant Menu">Menú Digital de Restó</h3>
+          <p data-es="Aplicación desarrollada con React y Vite. Incluye tarjetas de platos, precios formateados, disponibilidad, etiquetas y resumen del menú." data-en="A React and Vite application featuring dish cards, formatted prices, availability states, tags and a menu summary.">Aplicación desarrollada con React y Vite. Incluye tarjetas de platos, precios formateados, disponibilidad, etiquetas y resumen del menú.</p>
           <p class="project-links">
-            <a href="https://cecy-1984.github.io/menu-digital-resto/" target="_blank" rel="noopener noreferrer">Ver demo ↗</a>
+            <a href="https://cecy-1984.github.io/menu-digital-resto/" target="_blank" rel="noopener noreferrer" data-es="Ver demo ↗" data-en="Live demo ↗">Ver demo ↗</a>
             &nbsp;·&nbsp;
-            <a href="https://github.com/Cecy-1984/menu-digital-resto" target="_blank" rel="noopener noreferrer">Ver código ↗</a>
+            <a href="https://github.com/Cecy-1984/menu-digital-resto" target="_blank" rel="noopener noreferrer" data-es="Ver código ↗" data-en="View code ↗">Ver código ↗</a>
+          </p>
+        </div>
+        <span class="tag">React · Vite · CSS</span>
+      </div>
+      <div class="project">
+        <div>
+          <h3 data-es="CineApp — Catálogo de películas y tráilers" data-en="CineApp — Movie Catalog &amp; Trailers">CineApp — Catálogo de películas y tráilers</h3>
+          <p data-es="Aplicación desarrollada con React y Vite. Permite filtrar películas por categoría y consultar sinopsis y tráilers de YouTube en un modal." data-en="A React and Vite app for filtering movies by category and viewing synopses and YouTube trailers in a modal.">Aplicación desarrollada con React y Vite. Permite filtrar películas por categoría y consultar sinopsis y tráilers de YouTube en un modal.</p>
+          <p class="project-links">
+            <a href="https://github.com/Cecy-1984/cine-app" target="_blank" rel="noopener noreferrer" data-es="Ver código ↗" data-en="View code ↗">Ver código ↗</a>
+            &nbsp;·&nbsp;
+            <span class="project-status" data-es="Demo próximamente" data-en="Live demo coming soon">Demo próximamente</span>
           </p>
         </div>
         <span class="tag">React · Vite · CSS</span>
       </div>
     </div>
-    <p class="note">Estos son algunos de los proyectos y ejercicios que voy desarrollando durante mi formación.</p>
+    <p class="note" data-es="Estos son algunos de los proyectos y ejercicios que voy desarrollando durante mi formación." data-en="These are some of the projects and exercises I am building during my studies.">Estos son algunos de los proyectos y ejercicios que voy desarrollando durante mi formación.</p>
   </div>
 </section>
 
 <footer id="contacto">
   <div class="wrap">
-    <h2 class="section-title">Hablemos</h2>
-    <p>Recién empiezo, pero ya estoy con ganas de aprender, sumar experiencia y construir cosas. Si querés escribirme, estas son mis vías.</p>
+    <h2 class="section-title" data-es="Hablemos" data-en="Let’s connect">Hablemos</h2>
+    <p data-es="Estoy profundizando mis conocimientos de desarrollo web y sumando nuevas herramientas a la experiencia que ya construí creando sitios. Me interesa seguir aprendiendo, resolver problemas y desarrollar proyectos útiles. Podés contactarme por estos medios." data-en="I am deepening my web development skills and adding new tools to the experience I have already gained building websites. I am interested in continuing to learn, solving problems and creating useful projects. You can reach me through the links below.">Estoy profundizando mis conocimientos de desarrollo web y sumando nuevas herramientas a la experiencia que ya construí creando sitios. Me interesa seguir aprendiendo, resolver problemas y desarrollar proyectos útiles. Podés contactarme por estos medios.</p>
     <div class="hero-links">
       <a class="btn solid" href="mailto:cbrodriguez2019@gmail.com">cbrodriguez2019@gmail.com</a>
       <a class="btn" href="https://github.com/cecy-1984" target="_blank" rel="noopener">github.com/cecy-1984</a>
     </div>
-    <span class="fine">Instituto Superior Santa Rosa de Calamuchita · Desarrollo Web · 2026</span>
+    <span class="fine" data-es="Instituto Superior Santa Rosa de Calamuchita · Desarrollo Web · 2026" data-en="Instituto Superior Santa Rosa de Calamuchita · Web Development · 2026">Instituto Superior Santa Rosa de Calamuchita · Desarrollo Web · 2026</span>
   </div>
 </footer>
+
+
+<script>
+  (() => {
+    const toggle = document.getElementById('lang-toggle');
+    const description = document.querySelector('meta[name="description"]');
+
+    function setLanguage(language) {
+      document.documentElement.lang = language;
+      document.querySelectorAll('[data-es][data-en]').forEach((element) => {
+        element.textContent = element.dataset[language];
+      });
+
+      const isSpanish = language === 'es';
+      toggle.textContent = isSpanish ? 'EN' : 'ES';
+      toggle.setAttribute('aria-label', isSpanish ? 'Switch to English' : 'Cambiar a español');
+      document.title = isSpanish
+        ? 'Cecilia Rodríguez — De WordPress al desarrollo web'
+        : 'Cecilia Rodríguez — From WordPress to Web Development';
+
+      if (description) {
+        description.content = isSpanish
+          ? 'Portfolio de Cecilia Rodríguez: experiencia creando sitios con WordPress y formación en desarrollo web con HTML, CSS, JavaScript y React.'
+          : 'Cecilia Rodríguez’s portfolio: WordPress website-building experience and ongoing web development studies with HTML, CSS, JavaScript and React.';
+      }
+    }
+
+    toggle.addEventListener('click', () => {
+      setLanguage(document.documentElement.lang === 'es' ? 'en' : 'es');
+    });
+  })();
+</script>
 
 </body>
 </html>
